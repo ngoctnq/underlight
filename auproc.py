@@ -85,6 +85,7 @@ def doorCtrl():
     if not(headlight):
       notBroken = False
       break
+  headlight = False
   print 'Headlight turned off,',
   if notBroken:
     setColor(0,0,0)
