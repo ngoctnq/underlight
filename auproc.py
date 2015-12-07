@@ -135,6 +135,7 @@ while True:
    data = sys.stdin.read(BUFFER_RATE)
    # write audio out to speaker
    stream.write(data)
+   headlight = False
 
    # get the max volume of the read data
    maxVol=audioop.max(data,2)
