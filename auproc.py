@@ -26,6 +26,7 @@ headlight = False
 customlgt = False
 auproclgt = False
 lasttime = 0.
+turnedOn = 0.
 
 # copied somewhere online, thank you very much and sorry I could not credit you
 def incoming(host, port):
@@ -41,7 +42,7 @@ def incoming(host, port):
   return request.makefile('r', 0)
 
 def portListener(host, port):
-  global headlight, customlgt, auproclgt
+  global headlight, customlgt, auproclgt, turnedOn
   while True:
     for line in incoming(host, port):
       if len(line)>6:
@@ -52,7 +53,10 @@ def portListener(host, port):
           print 'Doorlight code detected.'
           # if (not(customlgt) and not(auproclgt)):
           if not(customlgt):
-            thread.start_new_thread(doorCtrl, ())
+            if headlight:
+               turnedOn = time()
+            else:
+               thread.start_new_thread(doorCtrl, ())
         else:
           try:
             red = int(line[0:2],16)
@@ -71,7 +75,7 @@ def portListener(host, port):
             pass
 
 def doorCtrl():
-  global headlight
+  global headlight, turnedOn
   print 'Headlight starting.'
   headlight = True
   setColor(255,255,255)
