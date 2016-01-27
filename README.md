@@ -1,6 +1,9 @@
 # underlight
 Python script running my LED strip at home with a Raspberry Pi
 
+Here's a video of it in action:
+https://www.instagram.com/p/_qJv3qFmj_/
+
 Requires `pigpiod`.
 This code is mainly used with `shairport-sync`, at least in my case, by
 ```
